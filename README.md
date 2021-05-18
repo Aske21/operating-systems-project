@@ -1,5 +1,5 @@
 # operating-systems-project
-##PROJECT 1 – System Calls and the Shell 
+#PROJECT 1 – System Calls and the Shell 
 
 Purpose: The purpose of this project is to familiarize you with the mechanics of process control through the implementation of a shell user interface. This includes the relationship between child and parent processes, the steps needed to create a new process, shell variables, and an introduction to user-input parsing and verification.
 

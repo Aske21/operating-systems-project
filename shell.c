@@ -9,7 +9,7 @@ int main(){
         char tab[256],*s;
 
         while(TRUE){
-                printf("prompt %d> ",i);
+                printf("o prompt$");
                 fflush(stdout);
                 s=gets(tab);
                 if(s==NULL){
@@ -18,10 +18,10 @@ int main(){
                         exit(0);
                 }
                 pid=fork();
-                printf("Im running\n");
+                printf("\n");
                 switch(pid){
                         case 0:
-                                printf("In the child\n");
+                                // printf("In the child\n");
                                 execlp(tab,tab,NULL);
                                 perror("EXEC");
                                 exit(0);
@@ -30,7 +30,7 @@ int main(){
                                 perror("fork");
                                 break;
                         default:
-                                printf("in the parent.... w8 \n");
+                                // printf("in the parent.... w8 \n");
                                 wait(0);
                                 i++;
                 }

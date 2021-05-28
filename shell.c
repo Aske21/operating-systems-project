@@ -1,40 +1,241 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <unistd.h>
+#include <readline/readline.h>
+#include <readline/history.h>
 
-#define TRUE 1
+
+#define MAXLET 1000 //max number of letters
+#define MAXCOMM 100 //max number of commands
+
+//clear shell using escape sequences
+#define clear() printf("\033[H\033[J")
+
+
+//shell banner
+void shell_banner(){
+clear();
+printf("Operating Systems Lab Project \n");
+printf("Shell made by: \n");
+printf("Mahmut Besirevic \n");
+printf("Asim Veledarevic \n");
+printf("Mirza Kurtovic \n");
+printf("\n");
+
+sleep(1);
+clear();
+}
+
+//take input
+
+int getInput(char* str){
+//make buffer
+char* tokens;
+tokens= readline("\no prompt$ ");
+//add to history
+if(strlen(tokens)!=0){
+add_history(tokens);
+strcpy(str,tokens);
+return 0;
+}else{
+	return 1;
+}
+}
+
+
+//print working directory
+void printDir(){
+char cwd[1024];
+getcwd(cwd,sizeof(cwd));
+printf("\nDir: %s",cwd);
+}
+
+
+//execute system commands
+void execArgs(char** parsed){
+
+//fork 
+pid_t pid = fork();
+
+//check for err
+if (pid==-1){
+	printf("\nError, failed forking...\nResetting");
+	return;
+
+}else if(pid ==0){
+	//if successfull fork but err executing
+if(execvp(parsed[0],parsed)<0){
+		printf("\nError, failed executing...\nResetting");
+		}
+		
+exit(0);
+}else{
+//wait for chiled
+wait(NULL);
+return;
+ }
+}
+
+//pipe handling
+
+void execPiped(char** parsed, char** parsedpipe){
+//0 for read end, 1 for write end
+	int pipefd[2];
+	pid_t p1,p2;
+	
+	if(pipe(pipefd)<0){
+		printf("\nError, pipe couldnt be initialized");
+		return;
+	}
+	p1=fork();
+	if(p1<0){
+		printf("\nError, couldnt fork");
+		return;
+	}
+	if(p1==0){
+		//child 1 execution
+		//only needs to write at write end
+		close(pipefd[0]);
+		dup2(pipefd[1],STDOUT_FILENO);
+		close(pipefd[1]);
+		if(execvp(parsed[0],parsed)<0){
+			printf("\nError executing first command... \nRestarting");
+				exit(0);
+		}
+		else{
+			//parent execution
+			p2=fork();
+			if(p2<0){
+				printf("\nError Forking");
+				return;
+			}
+			//child 2 execution
+			//only needs to read at read end
+			if(p2==0){
+				close(pipefd[1]);
+				dup2(pipefd[0],STDIN_FILENO);
+				close(pipefd[0]);
+				if(execvp(parsedpipe[0],parsedpipe)<0){
+					printf("\nError executing second command... \nRestarting");
+					exit(0);
+				}
+				else{
+					//parent execution, waiting for children
+					wait(NULL);
+					wait(NULL);
+				}
+			}
+		
+
+}
+}
+}
+//built in help command
+void openHelp(){
+puts("\nSupported commands:"
+	"\ncd"
+	"\nls"
+	"\nexit"
+	"\nAll unix commands"
+	"\nPiping"
+	"\nSpace handling"
+		
+		);
+return;
+}
+
+//built in command handling
+int cmdHandler(char** parsed){
+	int noOfCmds=3,i,switchArg=0;
+	char* listOfCmds[noOfCmds];
+	
+	listOfCmds[0]="exit";
+	listOfCmds[1]="cd";
+	listOfCmds[2]="help";
+	
+	for (i=0; i<noOfCmds; i++){
+		if(strcmp(parsed[0],listOfCmds[i])==0){
+			switchArg=i+1;
+			break;
+		}
+	}
+	switch (switchArg){
+		case 1:
+			printf("\nBye");
+			exit(0);
+		case 2:
+			chdir(parsed[1]);
+			return 1;
+		case 3:
+			openHelp();
+			return 1;
+		default:
+			break;
+	}
+return 0;
+}
+
+//find pipe
+int parsePipe(char* str, char** strpiped){
+	int i;
+	for(i=0;i<2;i++){
+		strpiped[i]=strsep(&str,"|");
+		if(strpiped[i]==NULL) break;
+	}
+	if(strpiped[1]==NULL) return 0; //return 0 if no pipe
+       	else{return 1;}	
+}
+
+//parse commands
+void parseSpace(char* str, char** parsed){
+	int i;
+	for (i=0;i<MAXCOMM; i++){
+		parsed[i]=strsep(&str," ");
+		if(parsed[i]==NULL) break;
+		if (strlen(parsed[i])==0) i--;
+	}
+}
+
+int processString(char* str, char** parsed, char** parsedpipe){
+char* strpiped[2];
+int piped=0;
+
+piped=parsePipe(str,strpiped);
+if(piped){
+	parseSpace(strpiped[0],parsed);
+	parseSpace(strpiped[1],parsedpipe);
+}else{
+	parseSpace(str,parsed);
+}
+if(cmdHandler(parsed)) return 0;
+else return 1+piped;
+
+}
+
+
+
 int main(){
-        int pid,i=0;
-        char tab[256],*s;
+        char inputString[MAXLET],*parsedArgs[MAXCOMM];
+	char* parsedArgsPiped[MAXCOMM];
+	int execFlag=0;
+	shell_banner();
+	while(1){
+		//print shell line
+		printDir();
+		//get input
+		if(getInput(inputString)) continue;
+		//process input
+		execFlag=processString(inputString,parsedArgs,parsedArgsPiped);
+		//returns 0 if no comkmand, or built in command
+		//1 for simple command, 2 for a pipe
 
-        while(TRUE){
-                printf("o prompt$");
-                fflush(stdout);
-                s=gets(tab);
-                if(s==NULL){
-                        //CTRL+D pressed
-                        fprintf(stderr,"Bye \n");
-                        exit(0);
-                }
-                pid=fork();
-                printf("\n");
-                switch(pid){
-                        case 0:
-                                // printf("In the child\n");
-                                execlp(tab,tab,NULL);
-                                perror("EXEC");
-                                exit(0);
-                                break;
-                        case -1:
-                                perror("fork");
-                                break;
-                        default:
-                                // printf("in the parent.... w8 \n");
-                                wait(0);
-                                i++;
-                }
-        }
-        return 0;
+		//execute
+		if(execFlag==1) execArgs(parsedArgs);
+		if(execFlag==2) execPiped(parsedArgs,parsedArgsPiped);
+	}
+	return 0;
 }
 

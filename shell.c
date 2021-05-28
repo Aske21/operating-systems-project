@@ -105,6 +105,7 @@ void execPiped(char** parsed, char** parsedpipe){
 			printf("\nError executing first command... \nRestarting");
 				exit(0);
 		}
+	}
 		else{
 			//parent execution
 			p2=fork();
@@ -132,7 +133,7 @@ void execPiped(char** parsed, char** parsedpipe){
 
 }
 }
-}
+
 //built in help command
 void openHelp(){
 puts("\nSupported commands:"
@@ -200,6 +201,7 @@ void parseSpace(char* str, char** parsed){
 }
 
 int processString(char* str, char** parsed, char** parsedpipe){
+
 char* strpiped[2];
 int piped=0;
 
@@ -211,7 +213,7 @@ if(piped){
 	parseSpace(str,parsed);
 }
 if(cmdHandler(parsed)) return 0;
-else return 1+piped;
+else return 1 + piped;
 
 }
 

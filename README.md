@@ -13,7 +13,7 @@ Purpose: The purpose of this project is to familiarize you with the mechanics of
 
 
 
-###Makefile is included for compiling with it
+<h3>Makefile is included for compiling with it</h3>
 
 
 ---

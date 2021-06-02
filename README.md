@@ -12,41 +12,45 @@ Purpose: The purpose of this project is to familiarize you with the mechanics of
 | Linux                    |
 
 
-######Makefile is included for compiling with it
+
+###Makefile is included for compiling with it
+
 
 ---
 
-######Command to compile the shell
-<code>gcc shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell</code>
+###Command to compile the shell
 
-######Command to run the shell 
-<code>./shell</code>
+
+<code>
+gcc shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell
+</code>
+
+
+###Command to run the shell 
+
+
+<code>
+./shell
+</code>
 
 ---
 
-![GNU](https://upload.wikimedia.org/wikipedia/commons/8/83/The_GNU_logo.png)
+<img src="https://upload.wikimedia.org/wikipedia/commons/8/83/The_GNU_logo.png" alt="GNU" width="200" height="200"/>
 
 
-| Project requirements     |   | 
-|--------------------------|---|
-| Basic shell interface    |   | 
-| C compiler               |   |
-| Linux                    |   |
+| Project requirements            |   | 
+|---------------------------------|---|
+| Basic shell interface           |✔️ |  
+| Execution of programms          |✔️ |
+| Execution of built in functions |✔️ |
+| Current dir display             |✔️ |
+| Command parsing                 |✔️ |
+| Command history                 |✔️ |
+| Error handling                  |✔️ |
+| Forking and child processes     |✔️ | 
+ 
 
 
-
-
-Task 1: Design and implement a basic shell interface that supports the execution of other programs and a series of built-in functions. The shell should be robust (e.g., it should not crash under any circumstance beyond machine failure). The shell (command line) is just a program that continually asks for user input, perhaps does something on the user’s behalf, resets itself, and again asks for user input. 
-
-
-At this point, the prompt should indicate that the shell is ready to accept input from the user. Oftentimes, it also shows useful information, such as the name of the user running the shell and the current directory. For now, you just need to implement a simple prompt. 
-
-The prompt should look like the following: 
-o prompt$
-
-Before the shell can begin executing commands, it needs to extract the command name and the arguments into “tokens”. It might be nice to store these tokens into an array so that you can then parse each one in order. 
-
-Once the shell understands what commands to execute it is time to implement the execution of simple commands. Since the execution of another program involves creating another process, you will have to use the fork() system call to create another process. Once you have created the new child process, that process must use the execvp() system call to execute the program. Finally, the parent (shell) process must wait for the child process to complete before releasing the child’s resources using the waitpid() system call. However, the execvp() system call may return if there is an error. If it does, your shell should print an error, reset, and prompt for new input.
 
 Task 1.1: Provide a concise and descriptive answer to the following questions. 
 

@@ -18,7 +18,7 @@ Purpose: The purpose of this project is to familiarize you with the mechanics of
 
 ---
 
-###Command to compile the shell
+Command to compile the shell
 
 
 <code>
@@ -26,7 +26,7 @@ gcc shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell
 </code>
 
 
-###Command to run the shell 
+Command to run the shell 
 
 
 <code>

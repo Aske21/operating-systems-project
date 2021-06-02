@@ -10,11 +10,14 @@ Purpose: The purpose of this project is to familiarize you with the mechanics of
 | The GNU Readline Library |
 | C compiler               |
 | Linux                    |
+| Readline GNU library     |
 
+<code>
+sudo apt-get install libreadline6 libreadline6-dev
+</code>
 
 
 <h3>Makefile is included for compiling with it</h3>
-
 
 ---
 
@@ -23,6 +26,12 @@ Command to compile the shell
 
 <code>
 gcc shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell
+</code>
+
+Or
+
+<code>
+	make
 </code>
 
 

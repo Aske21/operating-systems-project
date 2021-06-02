@@ -1,8 +1,12 @@
 CC = gcc
-clean: 
-	rm shell
-make:	shell
-	@echo "Compiling..."
-	sudo apt-get install libreadline6 libreadline6-dev
-	${CC} shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell
 
+LIBS=-L/usr/local/lib -I/user/local/include -lreadline 
+
+CFLAGS = $(COMPILER_WARNINGS) $(GDB_FLAGS)
+
+
+make:	shell
+	$(CC) $(CFLAGS) shell.c $@ $^ $(LIBS) -o shell
+
+clean:	
+	rm shell

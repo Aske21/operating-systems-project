@@ -3,6 +3,39 @@
 
 Purpose: The purpose of this project is to familiarize you with the mechanics of process control through the implementation of a shell user interface. This includes the relationship between child and parent processes, the steps needed to create a new process, shell variables, and an introduction to user-input parsing and verification.
 
+
+
+| Shell requirements       |
+|--------------------------|
+| The GNU Readline Library |
+| C compiler               |
+| Linux                    |
+
+
+######Makefile is included for compiling with it
+
+---
+
+######Command to compile the shell
+<code>gcc shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell</code>
+
+######Command to run the shell 
+<code>./shell</code>
+
+---
+
+![GNU](https://upload.wikimedia.org/wikipedia/commons/8/83/The_GNU_logo.png)
+
+
+| Project requirements     |   | 
+|--------------------------|---|
+| Basic shell interface    |   | 
+| C compiler               |   |
+| Linux                    |   |
+
+
+
+
 Task 1: Design and implement a basic shell interface that supports the execution of other programs and a series of built-in functions. The shell should be robust (e.g., it should not crash under any circumstance beyond machine failure). The shell (command line) is just a program that continually asks for user input, perhaps does something on the user’s behalf, resets itself, and again asks for user input. 
 
 

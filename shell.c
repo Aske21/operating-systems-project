@@ -23,9 +23,8 @@ printf("Shell made by: \n");
 printf("Mahmut Besirevic \n");
 printf("Asim Veledarevic \n");
 printf("Mirza Kurtovic \n");
-printf("\n");
 
-sleep(1);
+sleep(2);
 clear();
 }
 
@@ -34,10 +33,13 @@ clear();
 int getInput(char* str){
 //make buffer
 char* tokens;
+//set prompt and get input
 tokens= readline("\no prompt$ ");
 //add to history
 if(strlen(tokens)!=0){
+	//put input in history using readline history library
 add_history(tokens);
+
 strcpy(str,tokens);
 return 0;
 }else{
@@ -48,7 +50,9 @@ return 0;
 
 //print working directory
 void printDir(){
+
 char cwd[1024];
+//get current working dir and print it
 getcwd(cwd,sizeof(cwd));
 printf("\nDir: %s",cwd);
 }
@@ -62,6 +66,7 @@ pid_t pid = fork();
 
 //check for err
 if (pid==-1){
+	//Print err message
 	printf("\nError, failed forking...\nResetting");
 	return;
 
@@ -84,12 +89,14 @@ return;
 void execPiped(char** parsed, char** parsedpipe){
 //0 for read end, 1 for write end
 	int pipefd[2];
+	// get pipe processes
 	pid_t p1,p2;
-	
+	//if pipe err
 	if(pipe(pipefd)<0){
 		printf("\nError, pipe couldnt be initialized");
 		return;
 	}
+	//fork first process
 	p1=fork();
 	if(p1<0){
 		printf("\nError, couldnt fork");
@@ -99,6 +106,7 @@ void execPiped(char** parsed, char** parsedpipe){
 		//child 1 execution
 		//only needs to write at write end
 		close(pipefd[0]);
+		
 		dup2(pipefd[1],STDOUT_FILENO);
 		close(pipefd[1]);
 		if(execvp(parsed[0],parsed)<0){
@@ -152,7 +160,7 @@ return;
 int cmdHandler(char** parsed){
 	int noOfCmds=3,i,switchArg=0;
 	char* listOfCmds[noOfCmds];
-	
+	//basic command handler 
 	listOfCmds[0]="exit";
 	listOfCmds[1]="cd";
 	listOfCmds[2]="help";
@@ -181,11 +189,14 @@ return 0;
 
 //find pipe
 int parsePipe(char* str, char** strpiped){
+
 	int i;
 	for(i=0;i<2;i++){
+		//seperate on  | char
 		strpiped[i]=strsep(&str,"|");
 		if(strpiped[i]==NULL) break;
 	}
+
 	if(strpiped[1]==NULL) return 0; //return 0 if no pipe
        	else{return 1;}	
 }
@@ -194,24 +205,30 @@ int parsePipe(char* str, char** strpiped){
 void parseSpace(char* str, char** parsed){
 	int i;
 	for (i=0;i<MAXCOMM; i++){
+		//seperate string on space 
 		parsed[i]=strsep(&str," ");
 		if(parsed[i]==NULL) break;
 		if (strlen(parsed[i])==0) i--;
 	}
 }
 
+//process the input
 int processString(char* str, char** parsed, char** parsedpipe){
 
 char* strpiped[2];
 int piped=0;
 
+//get piped input(check if piped then parse)
 piped=parsePipe(str,strpiped);
 if(piped){
+	//if piped check for spaces and parse them
 	parseSpace(strpiped[0],parsed);
 	parseSpace(strpiped[1],parsedpipe);
 }else{
+	//parse spaces on non piped input
 	parseSpace(str,parsed);
 }
+// check if built in command and handle it
 if(cmdHandler(parsed)) return 0;
 else return 1 + piped;
 
@@ -220,12 +237,14 @@ else return 1 + piped;
 
 
 int main(){
+	//initialize strpngs 
         char inputString[MAXLET],*parsedArgs[MAXCOMM];
 	char* parsedArgsPiped[MAXCOMM];
 	int execFlag=0;
+	//display shell banner
 	shell_banner();
 	while(1){
-		//print shell line
+		//print current dir
 		printDir();
 		//get input
 		if(getInput(inputString)) continue;
@@ -234,8 +253,9 @@ int main(){
 		//returns 0 if no comkmand, or built in command
 		//1 for simple command, 2 for a pipe
 
-		//execute
+		//if simple pipe
 		if(execFlag==1) execArgs(parsedArgs);
+		//if piped
 		if(execFlag==2) execPiped(parsedArgs,parsedArgsPiped);
 	}
 	return 0;

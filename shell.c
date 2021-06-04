@@ -23,7 +23,8 @@ printf("Shell made by: \n");
 printf("Mahmut Besirevic \n");
 printf("Asim Veledarevic \n");
 printf("Mirza Kurtovic \n");
-
+printf("Ajdin Bajramovic \n");
+printf("Nedim Bajraktarevic \n");
 sleep(2);
 clear();
 }

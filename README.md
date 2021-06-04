@@ -54,7 +54,7 @@ Command to run the shell
 
 Task 1.1: Provide a concise and descriptive answer to the following questions.
 
-Q1: The following actions, do they require the OS to use kernel mode or user mode is sufficient? Explain.
+<h2>Q1: The following actions, do they require the OS to use kernel mode or user mode is sufficient? Explain.</h2>
 
 -Starting a new process.
 -Multiplying two floating numbers stored in an application’s memory.
@@ -70,7 +70,7 @@ The code ran on the computer is mostly in user mode hence the user mode being en
 
 - Writing the results of the multiplication to a temporary log file on disk:
 
-Q2: Explain the purpose of a system call. Describe how control passes to the kernel when executing a system call.
+<h2>Q2: Explain the purpose of a system call. Describe how control passes to the kernel when executing a system call.</h2>
 
 A2: A system call is a way for the program to request a service from the kernel in the operating system. Its purpose is interacting with the operating system, in the essence a system call a system call provides an API (Application User Interface) with its services from the operating system to the program which uses them.
 System calls are considered to be the only way to enter the kernel system, they allow the user level processes to request services of the operating system in use.

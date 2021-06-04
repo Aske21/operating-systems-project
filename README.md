@@ -54,11 +54,10 @@ Command to run the shell
 
 Task 1.1: Provide a concise and descriptive answer to the following questions.
 
-<h2>Q1: The following actions, do they require the OS to use kernel mode or user mode is sufficient? Explain.</h2>
-
+<h2>Q1: The following actions, do they require the OS to use kernel mode or user mode is sufficient? Explain.
 -Starting a new process.
 -Multiplying two floating numbers stored in an application’s memory.
--Writing the results of the multiplication to a temporary log file on disk.
+-Writing the results of the multiplication to a temporary log file on disk.</h2>
 
 A1: For this type of shell and its actions, the user mode is sufficient in order to run them. In the user mode the the code being executed has no direct access to the hardware or the reference memory.
 The code ran on the computer is mostly in user mode hence the user mode being enough.

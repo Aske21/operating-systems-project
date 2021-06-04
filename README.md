@@ -63,18 +63,20 @@ A1: For this type of shell and its actions, the user mode is sufficient in order
 The code ran on the computer is mostly in user mode hence the user mode being enough.
 
 - Starting a new process:
-  When starting a new process the user mode
-
+  While user mode is sufficient to simply start a new process, it has limited access to system resources.
+  
 - Multiplying two floating numbers stored in an application’s memory:
+  Anwser: For this operation, user mode is sufficient. The compiler is an application which, in this case, does not reuqire access to special functions or direct hardware         access.
 
 - Writing the results of the multiplication to a temporary log file on disk:
+  Anwser: Kernel mode must be invoked, because writing temporary log files is restricted for regular users.
 
 <h2>Q2: Explain the purpose of a system call. Describe how control passes to the kernel when executing a system call.</h2>
 
 A2: A system call is a method for the program to request a service from the kernel in the operating system. Its purpose is interacting with the operating system. In other words, a system call provides an API (Application User Interface) with its services from the operating system to the program which uses them.
 System calls are considered to be the only way to interact with the kernel, as they allow the user-level processes to request services of the operating system in use.
 
-An interrupt is used to transfer control to the kernel. The program uses the system call, along with the ID of the system call, then executes the system interrupt.
+An interrupt is used to transfer control to the kernel. The program uses the system call along with the ID of the system call, then executes the system interrupt.
 
 <h3>Tutorials and useful links</h3>
 

@@ -11,7 +11,7 @@
 
 # Folder structure
 
-<code>
+<tree>
 	
 📦task1.1
  ┣ 📜question1.txt
@@ -24,7 +24,7 @@
  ┣ 📜shell
  ┗ 📜shell.c
 
-</code>
+</tree>
 
 # Outline of the project
 

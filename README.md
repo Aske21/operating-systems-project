@@ -63,7 +63,7 @@ A1: For this type of shell and its actions, the user mode is sufficient in order
 The code ran on the computer is mostly in user mode hence the user mode being enough.
 
 - Starting a new process:
-  While user mode is sufficient to simply start a new process, it has limited access to system resources.
+  Anwser: While user mode is sufficient to simply start a new process, it has limited access to system resources.
   
 - Multiplying two floating numbers stored in an application’s memory:
   Anwser: For this operation, user mode is sufficient. The compiler is an application which, in this case, does not reuqire access to special functions or direct hardware         access.

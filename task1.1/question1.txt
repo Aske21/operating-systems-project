@@ -5,13 +5,10 @@ Q1: The following actions, do they require the OS to use kernel mode or user mod
 - Writing the results of the multiplication to a temporary log file on disk.
 
 
-A1: For this type of shell and its actions, the user mode is sufficient in order to run them. In the user mode the the code being executed has no direct access to the hardware or the reference memory.
-The code ran on the computer is mostly in user mode hence the user mode being enough. 
+A1: For this type of shell and its actions, the user mode is sufficient in order to run them. In the user mode the the code being executed has no direct access to the hardware or the reference memory. The code ran on the computer is mostly in user mode hence the user mode being enough.
 
-- Starting a new process:
-When starting a new process the user mode 
+Starting a new process: Anwser: While user mode is sufficient to simply start a new process, it has limited access to system resources.
 
-- Multiplying two floating numbers stored in an application’s memory:
+Multiplying two floating numbers stored in an application’s memory: Anwser: For this operation, user mode is sufficient. The compiler is an application which, in this case, does not reuqire access to special functions or direct hardware access.
 
-
-- Writing the results of the multiplication to a temporary log file on disk:
+Writing the results of the multiplication to a temporary log file on disk: Anwser: Kernel mode must be invoked, because writing temporary log files is restricted for regular users.

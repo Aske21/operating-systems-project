@@ -1,6 +1,5 @@
 Q2: Explain the purpose of a system call. Describe how control passes to the kernel when executing a system call. 
 
-A system call is a way for the program to request a service from the kernel in the operating system. Its purpose is interacting with the operating system, in the essence a system call a system call provides an API (Application User Interface) with its services from the operating system to the program which uses them.
-System calls are considered to be the only way to enter the kernel system, they allow the user level processes to request services of the operating system in use.
+A2: A system call is a method for the program to request a service from the kernel in the operating system. Its purpose is interacting with the operating system. In other words, a system call provides an API (Application User Interface) with its services from the operating system to the program which uses them. System calls are considered to be the only way to interact with the kernel, as they allow the user-level processes to request services of the operating system in use.
 
-A control is passed to the kernel is using an interupt or a trap. A interupt is used to transfer the control to the kernel, the program uses the system call with the number of the system call, and after executes the system interupt.
+An interrupt is used to transfer control to the kernel. The program uses the system call along with the ID of the system call, then executes the system interrupt.

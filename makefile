@@ -10,3 +10,5 @@ make:	shell
 
 clean:	
 	rm shell
+make:	all
+	$(CC) shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell

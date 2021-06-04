@@ -11,15 +11,16 @@
 
 # Folder structure
 
-+-- task1.1
-|   +-- question1.txt
-|   +-- question2.txt
-+-- .makefile.swp
-+-- .shell.swp
-+-- README.md
-+-- makefile
-+-- shell
-+-- shell.c
+📦task1.1
+ ┣ 📜question1.txt
+ ┗ 📜question2.txt
+
+ ┣ 📜.makefile.swp
+ ┣ 📜.shell.swp
+ ┣ 📜README.md
+ ┣ 📜makefile
+ ┣ 📜shell
+ ┗ 📜shell.c
 
 
 

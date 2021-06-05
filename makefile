@@ -1,14 +1,18 @@
-CC = gcc
+OBJS    = shell.o
+SOURCE    = shell.c
+HEADER    = 
+OUT    = shell
+CC     = gcc
+FLAGS     = -g -c -Wall
+LFLAGS     = -lreadline
 
-LIBS=-L/usr/local/lib -I/user/local/include -lreadline 
+all: $(OBJS)
+	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
 
-CFLAGS = $(COMPILER_WARNINGS) $(GDB_FLAGS)
+shell.o: shell.c
+	$(CC) $(FLAGS) shell.c 
 
 
-make:	shell
-	$(CC) $(CFLAGS) shell.c $@ $^ $(LIBS) -o shell
-
-clean:	
-	rm shell
-make:	all
-	$(CC) shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell
+clean:
+	rm -f $(OBJS) $(OUT)
+ 

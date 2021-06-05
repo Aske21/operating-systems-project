@@ -55,7 +55,7 @@ gcc shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell
 </code>
 
 Or
-<pre>
+
 <code>
 make clean
 
@@ -67,7 +67,7 @@ make all
 
 
 </code>
-</pre>
+
 Command to run the shell
 
 <code>

@@ -29,7 +29,7 @@
 
 # Outline of the project
 
-<b>The goal of this project is to get a better understanding of the mechanics of process control by creating a shell user interface. It covers the link between child and parent processes, the steps to establish a new process, shell variables, and an introduction to user-input parsing and verification. This is a type of a simple shell interface written in the C language, with some added features and built in commands.  </b>
+<b>The goal of this project is to get a better understanding of the mechanics of process control by creating a shell user interface. It covers the link between child and parent processes, the steps to establish a new process, shell variables, and an introduction to user-input parsing and verification. This is a simple shell interface written in the C language, with some added features and built in commands.  </b>
 
 Purpose: The purpose of this project is to familiarize with the mechanics of process control through the implementation of a shell user interface. This includes the relationship between child and parent processes, the steps needed to create a new process, shell variables, and an introduction to user-input parsing and verification.
 

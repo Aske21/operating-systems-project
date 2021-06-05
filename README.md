@@ -56,14 +56,17 @@ gcc shell.c -L/usr/local/lib -I/user/local/include -lreadline -o shell
 
 Or
 
+
 <code>
 make clean
 </code>
 
 
+
 <code>
 make all
 </code>
+
 
 Command to run the shell
 

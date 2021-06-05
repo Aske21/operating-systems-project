@@ -60,6 +60,8 @@ Or
 make clean
 </code>
 
+---
+
 <code>
 make all
 </code>

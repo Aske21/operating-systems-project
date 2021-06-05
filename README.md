@@ -104,7 +104,7 @@ The code ran on the computer is mostly in user mode hence the user mode being en
   Anwser: For this operation, user mode is sufficient. The compiler is an application which, in this case, does not reuqire access to special functions or direct hardware         access.
 
 - Writing the results of the multiplication to a temporary log file on disk:
-  Anwser: Kernel mode must be invoked, because writing temporary log files is restricted for regular users.
+  Anwser: Kernel mode must be invoked, because writing temporary log files is restricted to regular users.
 
 <h2>Q2: Explain the purpose of a system call. Describe how control passes to the kernel when executing a system call.</h2>
 

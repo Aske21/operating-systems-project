@@ -58,14 +58,11 @@ Or
 
 <code>
 make clean
-
-
 </code>
+
 
 <code>
 make all
-
-
 </code>
 
 Command to run the shell

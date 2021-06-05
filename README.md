@@ -60,7 +60,7 @@ Or
 <code>
 make clean
 </code>
-<!-- tsk -->
+<br/>
 <code>
 make all
 </code>
